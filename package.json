@@ -1,0 +1,24 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Blog with MERN Stack",
+  "main": "index.js",
+  "engines": {
+    "node": "15.2.1",
+    "npm": "6.14.11"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js --ignore './client/'",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm i --prefix client && npm run build --prefix client"
+  },
+  "author": "Jerald Baroro",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.11"
+  }
+}
