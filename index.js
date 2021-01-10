@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const keys = require("./config/keys");
 require("dotenv").config();
 const router = require("./routes/postRoutes");
 const app = express();
@@ -32,7 +33,7 @@ app.listen(PORT, () => {
 
 console.log("Connecting to MongoDB");
 mongoose.connect(
-  process.env.MONGODB_URI,
+  keys.mongoURI,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
