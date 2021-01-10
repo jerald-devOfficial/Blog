@@ -1,9 +1,12 @@
 const express = require("express");
-const app = express();
+const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
-
+const router = require("./routes/postRoutes");
+const app = express();
+app.use(cors());
 app.use(express.json());
+app.use("/api", router);
 
 if (process.env.NODE_ENV === "production") {
   // Express will serve up production assets
@@ -18,17 +21,24 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log("Successfully connected to the server.");
 });
+
+// set up routes
 
 // set up mongoose
 
 console.log("Connecting to MongoDB");
 mongoose.connect(
   process.env.MONGODB_URI,
-  { useNewUrlParser: true, useUnifiedTopology: true },
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  },
   (err) => {
     if (err) return console.log(err);
     console.log("MongoDB connection established");

@@ -1,3 +1,4 @@
+const express = require("express");
 const router = require("express").Router();
 const Post = require("../models/postModel");
 
@@ -6,7 +7,7 @@ const Post = require("../models/postModel");
 // });
 
 // make a post request to /
-router.post("/", async (req, res) => {
+router.post("/posts", async (req, res) => {
   // retrieve the data from the request
   const { title, createdAt, tags, html } = req.body;
   // construct the post model
@@ -25,12 +26,12 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
+router.get("/posts", async (req, res) => {
   const posts = await Post.find();
   res.json(posts);
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/posts/:id", async (req, res) => {
   const post = await Post.findById(req.params.id);
   res.json(post);
 });
